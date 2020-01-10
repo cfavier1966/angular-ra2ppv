@@ -1,0 +1,37 @@
+<h2>Products</h2>
+
+<!-- Iterate over products  -->
+<!-- repeats for each product in the list. -->
+<div *ngFor="let product of products; index as i">
+
+  <h3>
+    <!-- product details -->
+    <!-- [] => binding -->
+    <!-- Role over the product name to display its details -->
+    <a [title]="product.name + ' details[' + i + ']'" href="https://www.google.com">
+      product.name:
+      {{ product.name }}
+    </a>
+  </h3>
+
+  <!-- Add a paragraph for the description -->
+  <!-- But obly if not empty (*ngIf) -->
+  <!-- products fields are defined in products.ts -->
+  <p *ngIf="product.description">
+    Description: {{ product.description }} <br>
+    Audio: {{ product.audio }}
+  </p>
+ 
+  <!-- bind the Share button on the share() method --> 
+  <button (click)="share()">
+    Share
+  </button>
+
+  <!-- Pass current product as input to the component using property binding -->
+  <!-- "app-product-alerts" refers to selector in product-alerts;component.ts -->
+  <app-product-alerts
+    [product]="product" 
+    (notify)="onNotify()">
+  </app-product-alerts>
+
+</div>
